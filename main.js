@@ -3,10 +3,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // const currentPath = window.location.pathname;
 
     // Temporarily hide `.html` for cosmetic purposes
-    // if (currentPath.endsWith(".html")) {
-    //     const newPath = currentPath.replace(/\.html$/, "");
-    //     window.history.replaceState({}, "", newPath); // Use replaceState to prevent history issues
-    // }
+    if (currentPath.endsWith(".html")) {
+        const newPath = currentPath.replace(/\.html$/, "");
+        window.history.replaceState({}, "", newPath); // Use replaceState to prevent history issues
+    }
     // nav bar
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector(".nav2");
@@ -135,8 +135,8 @@ document.addEventListener("DOMContentLoaded", () => {
 let currentImageIndex = 0;
 const images = [
     './media/IMG-8102.jpg',
-    './media/IMG_3553.JPG',
-    './media/IMG_3556.JPG',
+    './media/IMG_3553.jpg',
+    './media/IMG_3556.jpg',
     './media/IMG_3557.jpg',
     './media/IMG_3800.jpg',
     './media/IMG_3832.jpg',

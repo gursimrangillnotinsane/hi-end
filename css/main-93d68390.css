@@ -4526,6 +4526,10 @@ html[dir=rtl] .formkit-message[data-message-type=validation]:before {
     padding: 4rem 1rem 4rem 1rem;
 }
 
+.getintouch {
+    width: 60%;
+}
+
 .getintouch>div {
     padding: 1rem;
 }
@@ -4770,6 +4774,11 @@ html[dir=rtl] .formkit-message[data-message-type=validation]:before {
     left: 0;
 }
 
+.nav2.active a {
+    padding: .75rem;
+    font-size: 1.25rem;
+}
+
 .nav-close {
     align-self: flex-end;
     cursor: pointer;
@@ -4781,6 +4790,10 @@ html[dir=rtl] .formkit-message[data-message-type=validation]:before {
 }
 
 @media (max-width: 64rem) {
+    .getintouch {
+        width: 100%;
+    }
+
     .beforeLg {
         flex-direction: column;
     }
