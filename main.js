@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Get the current URL
-    // const currentPath = window.location.pathname;
+    const currentPath = window.location.pathname;
 
     // Temporarily hide `.html` for cosmetic purposes
     if (currentPath.endsWith(".html")) {
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Open the nav when the hamburger is clicked
     hamburger.addEventListener("click", () => {
-        console.log("clicked");
+
         nav.classList.toggle("active");
     });
 
@@ -180,8 +180,7 @@ function navigate(direction) {
     emailjs.init('BNYx2BsJ-s1E9oy_o');
 })();
 const form = document.getElementById('input_00');
-console.log(form);
-console.log("jo")
+
 form.addEventListener('submit', async (event) => {
     console.log("submitted");
     event.preventDefault();
@@ -190,7 +189,7 @@ form.addEventListener('submit', async (event) => {
     const name = document.querySelector('input[name="fullname"]').value.trim();
     const email = document.querySelector('input[name="email"]').value.trim();
     const message = document.querySelector('div[name="message"]').innerText.trim();
-    console.log(name, email, message);
+
     // Validate fields
     if (!name || !email || !message) {
         alert("Please fill in all fields.");
@@ -202,7 +201,7 @@ form.addEventListener('submit', async (event) => {
     formData.append('fullname', name);
     formData.append('email', email);
     formData.append('message', message);
-    console.log(formData);
+
     // Send the form via emailjs
     emailjs
         .sendForm('service_r3hx8aj', 'template_jaqzod9', form)
