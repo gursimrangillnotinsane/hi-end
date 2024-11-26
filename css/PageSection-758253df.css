@@ -1,0 +1,54 @@
+section[data-v-58b40ead]:not(.absolute, .fixed, .relative, .sticky) {
+    position: relative
+}
+
+@media screen {
+    section.bg-pattern[data-v-58b40ead] {
+        --pattern-lines-color: rgba(222, 222, 222, 0.315);
+        background-image: linear-gradient(75deg, var(--pattern-lines-color) 3px, transparent 3px), linear-gradient(to left, rgba(255, 255, 255, .1), rgba(135, 135, 135, 0.096));
+        background-size: calc((100% - 2rem)/2);
+        background-position: calc(1rem - .5px) 50%;
+
+        /* --pattern-lines-color: rgba(190, 190, 190, 0.5);
+        background-image: radial-gradient(circle at 10%, var(--pattern-lines-color) 5%, transparent 5%), linear-gradient(45deg, rgba(255, 255, 255, .2), rgba(150, 150, 150, 0.1)); */
+
+    }
+
+    section.bg-pattern.bg-black[data-v-58b40ead],
+    .bg-black section.bg-pattern[data-v-58b40ead] {
+        --pattern-lines-color: rgba(74, 74, 74, 0.085);
+
+    }
+
+    @media (min-width: 64rem) {
+        section.bg-pattern[data-v-58b40ead] {
+            background-size: calc((100% - 2.5rem) / 6);
+            background-position: calc(1.25rem - .5px) 50%
+        }
+    }
+
+    section.bg-pattern-grid[data-v-58b40ead] {
+        --pattern-lines-color: rgba(222, 222, 222, 0.7);
+        background-image: linear-gradient(75deg, var(--pattern-lines-color) 3px, transparent 3px), linear-gradient(to left, rgba(255, 255, 255, .1), rgba(135, 135, 135, 0.096));
+        background-size: calc((100vw - 2rem) / 6) calc((100vw - 2rem) / 6 * 1.2);
+        background-position: calc(1rem - .5px) 50%
+    }
+
+    section.bg-pattern-grid.bg-black[data-v-58b40ead],
+    .bg-black section.bg-pattern-grid[data-v-58b40ead] {
+        --pattern-lines-color: rgba(74, 74, 74, .7)
+    }
+
+    @media (min-width: 64rem) {
+        section.bg-pattern-grid[data-v-58b40ead] {
+            background-size: calc((100vw - 2.5rem) / 12) calc((100vw - 2.5rem) / 12 * 1.2);
+            background-position: calc(1.25rem - .5px) 50%
+        }
+    }
+
+    @media (min-width: 90rem) {
+        section.bg-pattern-grid[data-v-58b40ead] {
+            background-size: calc((100vw - 2.5rem) / 18) calc((100vw - 2.5rem) / 18 * 1.2)
+        }
+    }
+}

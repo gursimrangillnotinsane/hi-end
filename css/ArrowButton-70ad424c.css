@@ -1,0 +1,40 @@
+div.padded[data-v-8e79f8c8] {
+    padding: 0 1rem
+}
+
+@media (min-width: 64rem) {
+    div.padded[data-v-8e79f8c8] {
+        padding: 0 1.25rem
+    }
+}
+
+div.vertical[data-v-8e79f8c8] {
+    min-height: 2.625rem
+}
+
+div.vertical[data-v-8e79f8c8] .cta {
+    transform: rotate(90deg)
+}
+
+.cta.secondary[data-v-8e79f8c8] {
+    position: relative;
+    padding: .5rem .75rem !important
+}
+
+.blur .cta.secondary[data-v-8e79f8c8] {
+    -webkit-backdrop-filter: blur(.75rem);
+    backdrop-filter: blur(.75rem);
+    color: white;
+}
+
+.blur .cta.secondary[data-v-8e79f8c8]:before {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: currentColor;
+    content: "";
+    opacity: .1
+}
