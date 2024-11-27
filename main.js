@@ -1,12 +1,24 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Get the current URL
-    const currentPath = window.location.pathname;
+const textarea = document.getElementById('input_3');
 
-    // Temporarily hide `.html` for cosmetic purposes
-    if (currentPath.endsWith(".html")) {
-        const newPath = currentPath.replace(/\.html$/, "");
-        window.history.replaceState({}, "", newPath); // Use replaceState to prevent history issues
-    }
+// Function to resize the textarea dynamically
+function autoResize() {
+    console.log('resize');
+    // Reset the height to auto to calculate the correct height
+    textarea.style.height = 'auto';
+    // Set the new height based on the scrollHeight
+    textarea.style.height = (textarea.scrollHeight) + 'px';
+}
+
+// Event listener to trigger on input
+textarea.addEventListener('input', autoResize);
+
+// Optional: Initialize the height when the page loads, in case there's initial content
+window.addEventListener('load', autoResize);
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
     // nav bar
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector(".nav2");
@@ -179,39 +191,124 @@ function navigate(direction) {
 (function () {
     emailjs.init('BNYx2BsJ-s1E9oy_o');
 })();
-const form = document.getElementById('input_00');
 
-form.addEventListener('submit', async (event) => {
-    console.log("submitted");
-    event.preventDefault();
 
-    // Get input values dynamically
-    const name = document.querySelector('input[name="fullname"]').value.trim();
-    const email = document.querySelector('input[name="email"]').value.trim();
-    const message = document.querySelector('div[name="message"]').innerText.trim();
+const form = document.querySelector('.formkit-form');
+const nameInput = form.querySelector('input[name="fullname"]');
+const emailInput = form.querySelector('input[name="email"]');
+const messageInput = form.querySelector('textarea[name="body"]');
 
-    // Validate fields
-    if (!name || !email || !message) {
-        alert("Please fill in all fields.");
-        return;
+function validateForm() {
+    clearMessages();
+    let isValid = true;
+
+    // Clear previous messages
+    clearMessages();
+
+    // Validate Full Name
+    if (!nameInput.value.trim()) {
+        showMessage("Full name is required.", "error", nameInput);
+        isValid = false;
     }
 
-    // Convert form fields into a FormData object
-    const formData = new FormData();
-    formData.append('fullname', name);
-    formData.append('email', email);
-    formData.append('message', message);
+    // Validate Email
+    const emailValue = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailValue) {
+        showMessage("Email is required.", "error", emailInput);
+        isValid = false;
+    } else if (!emailRegex.test(emailValue)) {
+        showMessage("Please enter a valid email address.", "error", emailInput);
+        isValid = false;
+    }
 
-    // Send the form via emailjs
-    emailjs
-        .sendForm('service_r3hx8aj', 'template_jaqzod9', form)
-        .then(() => {
-            alert('Message sent successfully!');
-            form.reset(); // Clear the form
-            document.querySelector('div[name="message"]').innerText = ''; // Clear the editable div
-        })
-        .catch((e) => {
-            alert('Failed to send the message. Please try again later.');
-            console.error(e);
-        });
+    // Validate Message
+    if (!messageInput.value.trim()) {
+        showMessage("Message cannot be empty.", "error", messageInput);
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+function showMessage(text, type, field) {
+    // Create a message element
+    const messageElement = document.createElement('div');
+    messageElement.className = 'formkit-message';
+    messageElement.dataset.messageType = type;
+    messageElement.innerText = text;
+
+    // Style based on type
+    if (type === "error") {
+        messageElement.style.color = "#ff3a28";
+    } else if (type === "success") {
+        messageElement.style.color = "#28a745";
+    }
+
+    // Insert the message after the field
+    field.closest('.formkit-outer').appendChild(messageElement);
+
+    // Highlight the field (optional)
+    field.style.borderColor = type === "error" ? "#ff3a28" : "";
+}
+
+function successMessage() {
+    // Create a message element
+    const messageElement = document.createElement('div');
+    messageElement.className = 'formkit-message';
+    messageElement.dataset.messageType = "success";
+    messageElement.innerText = "Message sent successfully!";
+
+    console.log('Message sent successfully!');
+
+    // Insert the message after the field
+    messageInput.closest('.formkit-outer').appendChild(messageElement);
+
+}
+
+function errorMessage() {
+    // Create a message element
+    const messageElement = document.createElement('div');
+    messageElement.className = 'formkit-message';
+    messageElement.dataset.messageType = "error";
+    messageElement.innerText = "Failed to send the message. Please try again later.";
+
+    console.log('Failed to send the message. Please try again later.');
+
+    // Insert the message after the field
+    messageInput.closest('.formkit-outer').appendChild(messageElement);
+
+}
+
+
+function clearMessages() {
+    const messages = form.querySelectorAll('.formkit-message');
+    messages.forEach(msg => msg.remove());
+
+    const inputs = form.querySelectorAll('input, div[name="message"]');
+    inputs.forEach(input => input.style.borderColor = '');
+}
+
+form.addEventListener('submit', async (event) => {
+
+    event.preventDefault();
+    if (!validateForm()) return;
+
+    // const formData = new FormData();
+    // formData.append('fullname', nameInput.value.trim());
+    // formData.append('email', emailInput.value.trim());
+    // formData.append('body', messageInput.innerText.trim());
+    // for (const [key, value] of formData.entries()) {
+    //     console.log(`${key}: ${value}`);
+    // }
+    try {
+        await emailjs.sendForm('service_r3hx8aj', 'template_jaqzod9', form);
+        successMessage();
+        messageInput.value = '';
+        emailInput.value = '';
+        nameInput.value = '';
+    } catch (error) {
+        console.error(error);
+        errorMessage();
+    };
 });

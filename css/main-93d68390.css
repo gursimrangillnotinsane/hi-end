@@ -71,6 +71,17 @@ body {
     line-height: inherit
 }
 
+textarea {
+    min-height: 100px;
+    /* Set the initial height */
+    resize: none;
+    /* Disable manual resizing if desired */
+    overflow-y: hidden;
+    /* Hide the scrollbars */
+    width: 100%;
+    /* Make it responsive */
+}
+
 button,
 input {
     font-family: inherit;
@@ -4416,7 +4427,8 @@ form[data-loading] .formkit-input:not([type=checkbox]) {
 .formkit-message {
     color: #ff3a28;
     font-size: .75rem;
-    text-align: inherit
+    text-align: inherit;
+    padding-top: 1rem;
 }
 
 .formkit-message[data-message-type=error],
@@ -4437,7 +4449,7 @@ form[data-loading] .formkit-input:not([type=checkbox]) {
     font-weight: 400;
     text-transform: none;
     line-height: 1;
-    content: "\e962";
+    /* content: "\e962"; */
     font-size: 1.25rem
 }
 
@@ -4455,16 +4467,13 @@ html[dir=rtl] .formkit-message[data-message-type=validation]:before {
 
 .formkit-message[data-message-type=error],
 .formkit-message[data-message-type=success] {
-    font-size: .875rem
+    font-size: 1rem
 }
 
 .formkit-message[data-message-type=success] {
     color: #32936f
 }
 
-.formkit-message[data-message-type=success]:before {
-    content: "\e926"
-}
 
 :not(.formkit-input):focus-visible {
     outline: solid 2px currentColor !important;
